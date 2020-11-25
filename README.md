@@ -3,7 +3,41 @@
 
 
 ### Usage
-`AWSegmentedControl`
+
+```swift
+import UIKit
+
+final class ViewController: UIViewController {
+    
+    @IBOutlet private weak var segmentedControl: AWSegmentedControl!
+    @IBOutlet private weak var textLabel: UILabel!
+
+    internal override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Configure Segmented Control
+        segmentedControl.delegate = self
+        segmentedControl.selectionRoundedCorners = 22
+        segmentedControl.imageSizeRatio = 0.7
+        segmentedControl.selectionColor = .blue
+        segmentedControl.selectedSegmentTextColor = .white
+        segmentedControl.segmentTextColor = .black
+        segmentedControl.segments = [
+            Segment(title: "Segment 1", image: "followers", selectedImage: "likes"),
+            Segment(title: "Segment 2", image: "engagement"),
+            Segment(title: "Segment 3", image: "likes")
+        ]
+    }
+}
+
+extension ViewController: AWSegmentedControlDelegate {
+    
+    internal func segmented(control: AWSegmentedControl, didChange selectedIndex: Int) {
+        textLabel.text = control.segment(of: selectedIndex)?.title
+    }
+}
+```
+
 
 
 ![alt text](https://github.com/tana90/AWSegmentedControl/blob/master/example1-image.png?raw=true)
