@@ -2,10 +2,10 @@
 ## Simple - lightweight Segmented Control
 
 ## Features
-- Segment image support with resize feature
-- Animated when segment is changed
-- Very customizable
-- Written in Swift
+- [x] Segment image support with resize feature
+- [x] Animated when segment is changed
+- [x] Very customizable
+- [x] Written in Swift
 
 
 ### Examples
@@ -57,6 +57,11 @@ extension ViewController: AWSegmentedControlDelegate {
     }
 }
 ```
+
+## Requirements
+
+- iOS 12.0+
+- Swift 5.0+
 
 
 ## How it looks
