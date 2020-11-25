@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Segment
 
-struct Segment {
+public struct Segment {
     var title: String!
     var image: String?
 }
