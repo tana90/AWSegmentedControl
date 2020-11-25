@@ -61,6 +61,9 @@ extension ViewController: AWSegmentedControlDelegate {
 
 ## How it looks
 ![alt text](https://github.com/tana90/AWSegmentedControl/blob/master/example1-image.png?raw=true)
+<p align="center">
+<img src="https://github.com/tana90/AWSegmentedControl/blob/master/example1-image.png?raw=true" alt="AWSegmentedControl" title="AWSegmentedControlTitle" width="357"/>
+</p>
 
 
 ## Contributors
