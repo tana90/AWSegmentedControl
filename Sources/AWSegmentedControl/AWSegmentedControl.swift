@@ -27,7 +27,7 @@ public struct Segment {
 // MARK: - UIControl
 
 open class AWSegmentedControl: UIControl {
-
+    
     // MARK: Properties
     
     @IBInspectable
@@ -128,9 +128,13 @@ extension AWSegmentedControl {
             segmentButton.addTarget(self, action: #selector(changeSegmentAction(sender:)), for: .touchUpInside)
             contentScrollView.addSubview(segmentButton)
             segmentButton.tag = iterator
-            segmentPosition.x += segmentWidth
             segmentButton.titleLabel?.textColor = selectedIndex == iterator ?
                 selectedSegmentTextColor : segmentTextColor
+            segmentButton.setTitleColor(selectedIndex == iterator ?
+                                            selectedSegmentTextColor : segmentTextColor,
+                                        for: .normal)
+            
+            segmentPosition.x += segmentWidth
         }
     }
     
@@ -138,9 +142,9 @@ extension AWSegmentedControl {
         UIView.animate(withDuration: 0.2) { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.selectionView.frame = CGRect(x: CGFloat(strongSelf.selectedIndex) * strongSelf.segmentWidth,
-                                         y: 0,
-                                         width: strongSelf.segmentWidth,
-                                         height: strongSelf.segmentHeight)
+                                                    y: 0,
+                                                    width: strongSelf.segmentWidth,
+                                                    height: strongSelf.segmentHeight)
         }
         
         
@@ -148,8 +152,9 @@ extension AWSegmentedControl {
             if let segmentButton = view as? UIButton,
                segmentButton.tag < 100 {
                 
-                segmentButton.titleLabel?.textColor = selectedIndex == segmentButton.tag ?
-                    selectedSegmentTextColor : segmentTextColor
+                segmentButton.setTitleColor(selectedIndex == segmentButton.tag ?
+                                                selectedSegmentTextColor : segmentTextColor,
+                                            for: .normal)
             }
         }
         
