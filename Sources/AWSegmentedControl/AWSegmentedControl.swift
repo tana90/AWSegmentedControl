@@ -7,12 +7,7 @@
 
 import UIKit
 
-// MARK: - Segment
-
-public struct Segment {
-    var title: String!
-    var image: String?
-}
+// MARK: - AWSegmentedControlDelegate
 
 public protocol AWSegmentedControlDelegate: class {
     func segmented(control: AWSegmentedControl, didChange index: Int)
@@ -21,6 +16,15 @@ public protocol AWSegmentedControlDelegate: class {
 // MARK: - UIControl
 
 open class AWSegmentedControl: UIControl {
+    
+    // MARK: Segment
+    
+    public struct Segment {
+        var title: String!
+        var image: String?
+    }
+    
+    // MARK: Properties
     
     @IBInspectable
     var selectedIndex: Int = 0 { didSet { moveSelection() } }
