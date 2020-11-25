@@ -71,4 +71,4 @@ extension ViewController: AWSegmentedControlDelegate {
 
 
 ### Contributors
-![https://github.com/tana90]
+@tana90
