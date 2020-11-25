@@ -1,5 +1,6 @@
 # SegmentedControl
 ## Simple - lightweight Segmented Control with icons
+<a href="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/SPM-supported-DE5C43.svg?style=flat"></a>
 
 ### Features
 - [x] Segment image support with resize feature
