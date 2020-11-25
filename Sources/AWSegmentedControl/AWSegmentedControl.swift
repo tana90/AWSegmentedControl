@@ -13,31 +13,31 @@ public protocol AWSegmentedControlDelegate: class {
     func segmented(control: AWSegmentedControl, didChange index: Int)
 }
 
+// MARK: Segment
+
+public struct Segment {
+    public var title: String!
+    public var image: String?
+    public init(title: String, image: String?) {
+        self.title = title
+        self.image = image
+    }
+}
+
 // MARK: - UIControl
 
 open class AWSegmentedControl: UIControl {
-    
-    // MARK: Segment
-    
-    public struct Segment {
-        public var title: String!
-        public var image: String?
-        public init(title: String, image: String?) {
-            self.title = title
-            self.image = image
-        }
-    }
-    
+
     // MARK: Properties
     
     @IBInspectable
-    var selectedIndex: Int = 0 { didSet { moveSelection() } }
+    public var selectedIndex: Int = 0 { didSet { moveSelection() } }
     @IBInspectable
-    var minimumSegmentSize: CGSize = CGSize(width: 120, height: 22)
+    public var minimumSegmentSize: CGSize = CGSize(width: 120, height: 22)
     @IBInspectable
-    var selectionColor: UIColor = .orange
-    var segments: [Segment] = [] { didSet { setupView() } }
-    weak var delegate: AWSegmentedControlDelegate?
+    public var selectionColor: UIColor = .orange
+    public var segments: [Segment] = [] { didSet { setupView() } }
+    public weak var delegate: AWSegmentedControlDelegate?
     
     open override var bounds: CGRect {
         didSet {
