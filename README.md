@@ -1,10 +1,11 @@
 # AWSegmentedControl
 ## Simple - lightweight Segmented Control
 
-# Features
-## Segment image support with resize feature
-## Animated when segment is changed
-## Very customizable
+## Features
+- Segment image support with resize feature
+- Animated when segment is changed
+- Very customizable
+- Written in Swift
 
 
 ### Examples
