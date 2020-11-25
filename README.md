@@ -1,7 +1,7 @@
 # AWSegmentedControl
 ## Simple - lightweight Segmented Control
 
-## Features
+### Features
 - [x] Segment image support with resize feature
 - [x] Animated when segment is changed
 - [x] Very customizable
@@ -58,17 +58,17 @@ extension ViewController: AWSegmentedControlDelegate {
 }
 ```
 
-## Requirements
+### Requirements
 
 - iOS 12.0+
 - Swift 5.0+
 
 
-## How it looks
+### How it looks
 <p align="left">
 <img src="https://github.com/tana90/AWSegmentedControl/blob/master/example1-image.png?raw=true" width="357"/>
 </p>
 
 
-## Contributors
+### Contributors
 [@tana90]
