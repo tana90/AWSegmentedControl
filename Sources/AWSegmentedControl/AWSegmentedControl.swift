@@ -45,6 +45,9 @@ open class AWSegmentedControl: UIControl {
     @IBInspectable
     public var segmentTextColor: UIColor = .black
     
+    @IBInspectable
+    public var segmentTextFont: UIFont = UIFont.systemFont(ofSize: 12)
+    
     public var segments: [Segment] = [] { didSet { setupView() } }
     public weak var delegate: AWSegmentedControlDelegate?
     
@@ -125,14 +128,13 @@ extension AWSegmentedControl {
             }
             segmentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
             segmentButton.addTarget(self, action: #selector(changeSegmentAction(sender:)), for: .touchUpInside)
-            contentScrollView.addSubview(segmentButton)
             segmentButton.tag = iterator
-            segmentButton.titleLabel?.textColor = selectedIndex == iterator ?
-                selectedSegmentTextColor : segmentTextColor
+            segmentButton.font = segmentTextFont
             segmentButton.setTitleColor(selectedIndex == iterator ?
                                             selectedSegmentTextColor : segmentTextColor,
                                         for: .normal)
             
+            contentScrollView.addSubview(segmentButton)
             segmentPosition.x += segmentWidth
         }
     }
