@@ -60,8 +60,8 @@ extension ViewController: AWSegmentedControlDelegate {
 
 
 ## How it looks
-<p align="center">
-<img src="https://github.com/tana90/AWSegmentedControl/blob/master/example1-image.png?raw=true" width="357" align:left/>
+<p align="left">
+<img src="https://github.com/tana90/AWSegmentedControl/blob/master/example1-image.png?raw=true" width="357"/>
 </p>
 
 
