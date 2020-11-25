@@ -152,12 +152,14 @@ extension AWSegmentedControl {
             if let segmentButton = view as? UIButton,
                segmentButton.tag < 100 {
                 
-                segmentButton.setTitleColor(selectedIndex == segmentButton.tag ?
-                                                selectedSegmentTextColor : segmentTextColor,
-                                            for: .normal)
+                UIView.performWithoutAnimation {
+                    segmentButton.setTitleColor(selectedIndex == segmentButton.tag ?
+                                                    selectedSegmentTextColor : segmentTextColor,
+                                                for: .normal)
+                    segmentButton.layoutIfNeeded()
+                }
             }
         }
-        
     }
     
     func removeViews() {
