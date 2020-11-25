@@ -18,9 +18,11 @@ public protocol AWSegmentedControlDelegate: class {
 public struct Segment {
     public var title: String!
     public var image: String?
-    public init(title: String, image: String?) {
+    public var selectedImage: String?
+    public init(title: String, image: String? = nil, selectedImage: String? = nil) {
         self.title = title
         self.image = image
+        self.selectedImage = selectedImage
     }
 }
 
@@ -29,6 +31,9 @@ public struct Segment {
 open class AWSegmentedControl: UIControl {
     
     // MARK: Properties
+    
+    @IBInspectable
+    public var selectionRoundedCorners: CGFloat = 2
     
     @IBInspectable
     public var selectedIndex: Int = 0 { didSet { moveSelection() } }
@@ -67,10 +72,10 @@ open class AWSegmentedControl: UIControl {
     
     lazy private var selectionView: UIView = {
         let view = UIView()
-        view.backgroundColor = selectionColor
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = selectionRoundedCorners
         view.layer.masksToBounds = true
         view.tag = 100
+        view.backgroundColor = selectionColor
         contentScrollView.addSubview(view)
         contentScrollView.sendSubviewToBack(view)
         return view
@@ -81,34 +86,37 @@ open class AWSegmentedControl: UIControl {
 
 extension AWSegmentedControl {
     
-    var segmentWidth: CGFloat {
+    private var segmentWidth: CGFloat {
         get {
             max(minimumSegmentSize.width, self.bounds.size.width / CGFloat(self.segments.count))
         }
     }
-    var segmentHeight: CGFloat {
+    
+    private var segmentHeight: CGFloat {
         get {
             max(minimumSegmentSize.height, bounds.size.height)
         }
     }
-    var contentWidth: CGFloat {
+    
+    private var contentWidth: CGFloat {
         get {
             segmentWidth * CGFloat(segments.count)
         }
     }
-    var contentHeight: CGFloat {
+    
+    private var contentHeight: CGFloat {
         get {
             segmentHeight
         }
     }
     
-    func setupView() {
+    private func setupView() {
         removeViews()
         render()
         moveSelection()
     }
     
-    func render() {
+    private func render() {
         
         var segmentPosition: CGPoint = {
             return CGPoint(x: 0, y: 0)
@@ -119,13 +127,7 @@ extension AWSegmentedControl {
             segmentButton.frame = CGRect(x: segmentPosition.x, y: segmentPosition.y,
                                          width: segmentWidth, height: segmentHeight)
             segmentButton.setTitle(element.title, for: .normal)
-            if let image = UIImage(named: element.image ?? String()) {
-                let resizedImage = resize(image: image,
-                                          segmentHeight / 2,
-                                          opaque: false,
-                                          contentMode: .scaleAspectFit)
-                segmentButton.setImage(resizedImage, for: .normal)
-            }
+            set(imageName: selectedIndex == iterator ? element.selectedImage : element.image, for: segmentButton)
             segmentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
             segmentButton.addTarget(self, action: #selector(changeSegmentAction(sender:)), for: .touchUpInside)
             segmentButton.tag = iterator
@@ -139,7 +141,8 @@ extension AWSegmentedControl {
         }
     }
     
-    func moveSelection() {
+    private func moveSelection() {
+        guard segments.count > 0 else { return }
         UIView.animate(withDuration: 0.2) { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.selectionView.frame = CGRect(x: CGFloat(strongSelf.selectedIndex) * strongSelf.segmentWidth,
@@ -152,17 +155,22 @@ extension AWSegmentedControl {
         contentScrollView.subviews.forEach { (view) in
             if let segmentButton = view as? UIButton,
                segmentButton.tag < 100 {
+                let index = segmentButton.tag
+                let segment = segments[index]
                 
                 UIView.performWithoutAnimation {
-                    segmentButton.setTitleColor(selectedIndex == segmentButton.tag ?
+                    set(imageName: selectedIndex == index ? segment.selectedImage : segment.image, for: segmentButton)
+                    segmentButton.setTitleColor(selectedIndex == index ?
                                                     selectedSegmentTextColor : segmentTextColor,
                                                 for: .normal)
                 }
             }
         }
+        
+        delegate?.segmented(control: self, didChange: selectedIndex)
     }
     
-    func removeViews() {
+    private func removeViews() {
         contentScrollView.subviews.forEach { (view) in
             if view.tag < 100 {
                 view.removeFromSuperview()
@@ -177,7 +185,6 @@ extension AWSegmentedControl {
     
     @objc private func changeSegmentAction(sender: UIButton) {
         selectedIndex = sender.tag
-        delegate?.segmented(control: self, didChange: selectedIndex)
     }
 }
 
@@ -185,7 +192,17 @@ extension AWSegmentedControl {
 
 extension AWSegmentedControl {
     
-    func resize(image: UIImage,
+    private func set(imageName: String?, for button: UIButton) {
+        guard let imageName = imageName, let image = UIImage(named: imageName) else { return }
+        let resizedImage = resize(image: image,
+                                  segmentHeight / 2,
+                                  opaque: false,
+                                  contentMode: .scaleAspectFit)
+        
+        button.setImage(resizedImage, for: .normal)
+    }
+    
+    private func resize(image: UIImage,
                 _ dimension: CGFloat,
                 opaque: Bool,
                 contentMode: UIView.ContentMode = .scaleAspectFit) -> UIImage {
