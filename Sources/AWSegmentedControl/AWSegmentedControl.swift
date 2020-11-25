@@ -27,7 +27,7 @@ open class AWSegmentedControl: UIControl {
     @IBInspectable
     var minimumSegmentSize: CGSize = CGSize(width: 120, height: 22)
     @IBInspectable
-    var tintColor: UIColor = .orange
+    var selectionColor: UIColor = .orange
     var segments: [Segment] = [] { didSet { setupView() } }
     weak var delegate: AWSegmentedControlDelegate?
     
@@ -47,7 +47,7 @@ open class AWSegmentedControl: UIControl {
     
     lazy private var selectionView: UIView = {
         let view = UIView()
-        view.backgroundColor = tintColor
+        view.backgroundColor = selectionColor
         view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
         view.tag = 100
