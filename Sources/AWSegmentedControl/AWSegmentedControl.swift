@@ -129,6 +129,8 @@ extension AWSegmentedControl {
             contentScrollView.addSubview(segmentButton)
             segmentButton.tag = iterator
             segmentPosition.x += segmentWidth
+            segmentButton.titleLabel?.textColor = selectedIndex == iterator ?
+                selectedSegmentTextColor : segmentTextColor
         }
     }
     
