@@ -46,7 +46,7 @@ open class AWSegmentedControl: UIControl {
     public var segmentTextColor: UIColor = .black
     
     @IBInspectable
-    public var segmentTextFont: UIFont = UIFont.systemFont(ofSize: 12)
+    public var segmentTextFont: UIFont? = UIFont.systemFont(ofSize: 12)
     
     public var segments: [Segment] = [] { didSet { setupView() } }
     public weak var delegate: AWSegmentedControlDelegate?
