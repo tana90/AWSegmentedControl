@@ -146,7 +146,7 @@ extension AWSegmentedControl {
             if let segmentButton = view as? UIButton,
                segmentButton.tag < 100 {
                 
-                segmentButton.titleLabel.textColor = selectedIndex == segmentButton.tag ?
+                segmentButton.titleLabel?.textColor = selectedIndex == segmentButton.tag ?
                     selectedSegmentTextColor : segmentTextColor
             }
         }
