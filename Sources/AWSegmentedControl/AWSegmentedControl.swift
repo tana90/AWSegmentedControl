@@ -32,10 +32,19 @@ open class AWSegmentedControl: UIControl {
     
     @IBInspectable
     public var selectedIndex: Int = 0 { didSet { moveSelection() } }
+    
     @IBInspectable
     public var minimumSegmentSize: CGSize = CGSize(width: 120, height: 22)
+    
     @IBInspectable
     public var selectionColor: UIColor = .orange
+    
+    @IBInspectable
+    public var selectedSegmentTextColor: UIColor = .white
+    
+    @IBInspectable
+    public var segmentTextColor: UIColor = .black
+    
     public var segments: [Segment] = [] { didSet { setupView() } }
     public weak var delegate: AWSegmentedControlDelegate?
     
@@ -119,7 +128,6 @@ extension AWSegmentedControl {
             segmentButton.addTarget(self, action: #selector(changeSegmentAction(sender:)), for: .touchUpInside)
             contentScrollView.addSubview(segmentButton)
             segmentButton.tag = iterator
-            
             segmentPosition.x += segmentWidth
         }
     }
@@ -131,6 +139,16 @@ extension AWSegmentedControl {
                                          y: 0,
                                          width: strongSelf.segmentWidth,
                                          height: strongSelf.segmentHeight)
+        }
+        
+        
+        contentScrollView.subviews.forEach { (view) in
+            if let segmentButton = view as? UIButton,
+               segmentButton.tag < 100 {
+                
+                segmentButton.titleLabel.textColor = selectedIndex == segmentButton.tag ?
+                    selectedSegmentTextColor : segmentTextColor
+            }
         }
         
     }
