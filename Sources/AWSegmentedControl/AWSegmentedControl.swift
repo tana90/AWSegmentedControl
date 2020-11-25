@@ -112,10 +112,9 @@ extension AWSegmentedControl {
         }()
         
         segments.enumerated().forEach { (iterator, element) in
-            let segmentButton = UIButton(frame: CGRect(x: segmentPosition.x,
-                                                       y: segmentPosition.y,
-                                                       width: segmentWidth,
-                                                       height: segmentHeight))
+            let segmentButton = UIButton(type: .custom)
+            segmentButton.frame = CGRect(x: segmentPosition.x, y: segmentPosition.y,
+                                         width: segmentWidth, height: segmentHeight)
             segmentButton.setTitle(element.title, for: .normal)
             if let image = UIImage(named: element.image ?? String()) {
                 let resizedImage = resize(image: image,
@@ -156,7 +155,6 @@ extension AWSegmentedControl {
                     segmentButton.setTitleColor(selectedIndex == segmentButton.tag ?
                                                     selectedSegmentTextColor : segmentTextColor,
                                                 for: .normal)
-                    segmentButton.layoutIfNeeded()
                 }
             }
         }
