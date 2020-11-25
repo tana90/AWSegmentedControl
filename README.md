@@ -10,6 +10,7 @@
 
 ### Examples
 
+Created programatically 
 ```swift
 lazy var segmentedControl: AWSegmentedControl! = {
         let segmentedControl = AWSegmentedControl()
@@ -28,7 +29,7 @@ lazy var segmentedControl: AWSegmentedControl! = {
     }()
 ```
 
-
+Loaded from XIB
 ```swift
 import UIKit
 
@@ -42,11 +43,6 @@ final class ViewController: UIViewController {
         
         // Configure Segmented Control
         segmentedControl.delegate = self
-        segmentedControl.selectionRoundedCorners = 22
-        segmentedControl.imageSizeRatio = 0.7
-        segmentedControl.selectionColor = .blue
-        segmentedControl.selectedSegmentTextColor = .white
-        segmentedControl.segmentTextColor = .black
         segmentedControl.segments = [
             Segment(title: "Segment 1", image: "followers", selectedImage: "likes"),
             Segment(title: "Segment 2", image: "engagement"),
