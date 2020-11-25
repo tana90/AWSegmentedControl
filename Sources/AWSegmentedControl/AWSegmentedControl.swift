@@ -129,7 +129,7 @@ extension AWSegmentedControl {
             segmentButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
             segmentButton.addTarget(self, action: #selector(changeSegmentAction(sender:)), for: .touchUpInside)
             segmentButton.tag = iterator
-            segmentButton.font = segmentTextFont
+            segmentButton.titleLabel?.font = segmentTextFont
             segmentButton.setTitleColor(selectedIndex == iterator ?
                                             selectedSegmentTextColor : segmentTextColor,
                                         for: .normal)
