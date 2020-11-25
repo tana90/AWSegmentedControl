@@ -1,5 +1,5 @@
-# AWSegmentedControl
-## Simple - lightweight Segmented Control
+# SegmentedControl
+## Simple - lightweight Segmented Control with icons
 
 ### Features
 - [x] Segment image support with resize feature
