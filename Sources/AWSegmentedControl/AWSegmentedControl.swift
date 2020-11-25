@@ -20,8 +20,8 @@ open class AWSegmentedControl: UIControl {
     // MARK: Segment
     
     public struct Segment {
-        var title: String!
-        var image: String?
+        public var title: String!
+        public var image: String?
     }
     
     // MARK: Properties
