@@ -22,6 +22,10 @@ open class AWSegmentedControl: UIControl {
     public struct Segment {
         public var title: String!
         public var image: String?
+        public init(title: String, image: String?) {
+            self.title = title
+            self.image = image
+        }
     }
     
     // MARK: Properties
