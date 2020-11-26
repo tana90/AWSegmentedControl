@@ -36,7 +36,7 @@ open class AWSegmentedControl: UIControl {
     public var selectionRoundedCorners: CGFloat = 2
     
     @IBInspectable
-    public var selectedSegmentIndex: Int = -1 { didSet { moveSelection() } }
+    public var selectedSegmentIndex: Int = 0 { didSet { moveSelection() } }
     
     @IBInspectable
     public var minimumSegmentSize: CGSize = CGSize(width: 120, height: 22)
