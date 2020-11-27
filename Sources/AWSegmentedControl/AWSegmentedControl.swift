@@ -56,7 +56,12 @@ open class AWSegmentedControl: UIControl {
     @IBInspectable
     public var imageSizeRatio: Double = 0.5
     
-    public var segments: [Segment] = [] { didSet { setupView() } }
+    public var segments: [Segment] = [] {
+        didSet {
+            contentScrollView.contentSize = CGSize(width: contentWidth, height: contentHeight)
+            setupView()
+        }
+    }
     public weak var delegate: AWSegmentedControlDelegate?
     
     open override var bounds: CGRect {
@@ -151,6 +156,7 @@ extension AWSegmentedControl {
     
     private func moveSelection() {
         guard segments.count > 0 else { return }
+        if segments.count < selectedSegmentIndex { selectedSegmentIndex = segments.count - 1 }
         UIView.animate(withDuration: 0.2) { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.selectionView.frame = CGRect(x: CGFloat(strongSelf.selectedSegmentIndex) * strongSelf.segmentWidth,
