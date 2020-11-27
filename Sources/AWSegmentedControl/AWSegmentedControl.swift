@@ -74,6 +74,8 @@ open class AWSegmentedControl: UIControl {
     
     lazy private var contentScrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.bounces = false
+        scrollView.alwaysBounceVertical = false
         self.addSubview(scrollView)
         return scrollView
     }() { didSet { setupView() } }
@@ -107,7 +109,7 @@ extension AWSegmentedControl {
     
     private var segmentHeight: CGFloat {
         get {
-            max(minimumSegmentSize.height, bounds.size.height)
+            bounds.size.height
         }
     }
     
