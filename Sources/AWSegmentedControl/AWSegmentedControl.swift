@@ -40,7 +40,7 @@ open class AWSegmentedControl: UIControl {
     
     @IBInspectable
     public var minimumSegmentSize: CGSize = CGSize(width: 120, height: 22)
-    
+
     @IBInspectable
     public var selectionColor: UIColor = .orange
     
@@ -48,7 +48,13 @@ open class AWSegmentedControl: UIControl {
     public var selectedSegmentTextColor: UIColor = .white
     
     @IBInspectable
+    public var selectedTintImageColor: UIColor = .white    
+    
+    @IBInspectable
     public var segmentTextColor: UIColor = .black
+    
+    @IBInspectable
+    public var segmentTintImageColor: UIColor = .black
     
     @IBInspectable
     public var segmentTextFont: UIFont? = UIFont.systemFont(ofSize: 12)
@@ -138,7 +144,7 @@ extension AWSegmentedControl {
         }()
         
         segments.enumerated().forEach { (iterator, element) in
-            let segmentButton = UIButton(type: .custom)
+            let segmentButton = UIButton(type: .system)
             segmentButton.frame = CGRect(x: segmentPosition.x, y: segmentPosition.y,
                                          width: segmentWidth, height: segmentHeight)
             segmentButton.setTitle(element.title, for: .normal)
@@ -150,6 +156,9 @@ extension AWSegmentedControl {
             segmentButton.setTitleColor(selectedSegmentIndex == iterator ?
                                             selectedSegmentTextColor : segmentTextColor,
                                         for: .normal)
+            
+            segmentButton.tintColor = selectedSegmentIndex == iterator ?
+                selectedTintImageColor : segmentTintImageColor
             
             contentScrollView.addSubview(segmentButton)
             segmentPosition.x += segmentWidth
@@ -178,6 +187,9 @@ extension AWSegmentedControl {
                     segmentButton.setTitleColor(selectedSegmentIndex == index ?
                                                     selectedSegmentTextColor : segmentTextColor,
                                                 for: .normal)
+
+                    segmentButton.tintColor = selectedSegmentIndex == index ?
+                        selectedTintImageColor : segmentTintImageColor
                 }
             }
         }
