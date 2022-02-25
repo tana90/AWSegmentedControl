@@ -13,7 +13,7 @@
 
 Created programatically 
 ```swift
-lazy var segmentedControl: AWSegmentedControl! = {
+lazy var segmentedControl: AWSegmentedControl = {
         let segmentedControl = AWSegmentedControl()
         segmentedControl.delegate = self
         segmentedControl.selectionRoundedCorners = 22
